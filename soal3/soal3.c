@@ -19,6 +19,7 @@
 #define D 3
 #define STAR 4
 int countfile = 1;
+int work = 0;
 
 int isDirectory(const char *path)
 {
@@ -84,19 +85,23 @@ int checkMainArg(int argc, char *argv[])
 
 void moveFileToNewPath(char *source, char *dest)
 {
-    FILE *fp1, *fp2;
-    int ch;
+    if (!isDirectory(source))
+    {
+        FILE *fp1, *fp2;
+        int ch;
 
-    fp1 = fopen(source, "r");
-    fp2 = fopen(dest, "w");
+        fp1 = fopen(source, "r");
+        fp2 = fopen(dest, "w");
 
-    while ((ch = fgetc(fp1)) != EOF)
-        fputc(ch, fp2);
+        while ((ch = fgetc(fp1)) != EOF)
+            fputc(ch, fp2);
 
-    fclose(fp1);
-    fclose(fp2);
+        fclose(fp1);
+        fclose(fp2);
 
-    remove(source);
+        remove(source);
+        work++;
+    }
 }
 
 void *moveFile(void *ptr)
@@ -160,6 +165,52 @@ void *moveFile(void *ptr)
         }
     }
 }
+
+void *catFolder(void *ptr)
+{
+    int flag = 0;
+    char *param = (char *)ptr;
+    const char *extension_temp = get_filename_ext(param);
+    int ch, i, length = strlen(extension_temp);
+    char extension[100];
+    char *filename = basename(param);
+    char new_path[1000], temp[1000];
+    if (filename[0] == '.')
+    {
+        if (!isDirectory("Hidden"))
+            mkdir("Hidden", 0777);
+        strcpy(new_path, "Hidden/");
+        strcat(new_path, filename);
+        moveFileToNewPath(param, new_path);
+    }
+    else
+    {
+        memset(new_path, 0, sizeof(new_path));
+        memset(extension, 0, sizeof(extension));
+        for (i = 1; i < length; i++)
+        {
+            extension[i - 1] = tolower(extension_temp[i]);
+        }
+
+        if (!strlen(extension_temp))
+        {
+            if (!isDirectory("Unknown"))
+                mkdir("Unknown", 0777);
+            strcpy(new_path, "Unknown/");
+            strcat(new_path, filename);
+            flag = 1;
+        }
+        else
+        {
+            if (!isDirectory(extension))
+                mkdir(extension, 0777);
+            strcpy(new_path, extension);
+            strcat(new_path, "/");
+            strcat(new_path, filename);
+        }
+        moveFileToNewPath(param, new_path);
+    }
+}
 int i = 0;
 void listFilesRecursively(char *basePath, int *iret, pthread_t *threads)
 {
@@ -174,14 +225,14 @@ void listFilesRecursively(char *basePath, int *iret, pthread_t *threads)
     {
         if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0)
         {
-            printf("%s\n", dp->d_name);
+            //printf("%s\n", dp->d_name);
 
             // Construct new path from our base path
             strcpy(path, basePath);
             strcat(path, "/");
             strcat(path, dp->d_name);
             char *arr = path;
-            iret[i] = pthread_create(&threads[i], NULL, moveFile, (void *)arr);
+            iret[i] = pthread_create(&threads[i], NULL, catFolder, (void *)arr);
             if (iret[i])
             {
                 fprintf(stderr, "Error - pthread_create() return code: %d\n", iret[i]);
@@ -192,7 +243,6 @@ void listFilesRecursively(char *basePath, int *iret, pthread_t *threads)
             listFilesRecursively(path, iret, threads);
         }
     }
-
     closedir(dir);
 }
 
@@ -241,7 +291,16 @@ int main(int argc, char *argv[])
         if (dp != NULL)
         {
             listFilesRecursively(argv[2], iret, threads);
+            if (work == 0)
+            {
+                printf("Yah, gagal disimpan :(\n");
+            }
+            else
+            {
+                printf("Direktori Sukses Disimpan!\n");
+            }
         }
+
         break;
     case STAR:
         if (getcwd(curr_dirr, sizeof(curr_dirr)) != NULL)
