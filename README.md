@@ -322,7 +322,7 @@ void *catFolder(void *ptr)
 Pada soal ini diminta untuk membuat program ini menerima opsi *, contohnya ada di bawah ini:
 $ ./soal3 \*
 Opsi ini akan mengkategorikan seluruh file yang ada di working directory ketika menjalankan program C tersebut.
-hal yang dilakukan mirip seperti pada **soal 3c** yaitu dengan membuat case baru
+hal yang dilakukan mirip seperti pada **soal 3b** yaitu dengan membuat case baru
 ```
   case STAR:
         if (getcwd(curr_dirr, sizeof(curr_dirr)) != NULL)
@@ -336,7 +336,7 @@ hal yang dilakukan mirip seperti pada **soal 3c** yaitu dengan membuat case baru
         break;
 ```
 lalu menggunakan fungsi yang sama yaitu `listFilesRecursively(curr_dirr, iret, threads);`
-### Soal 3e
+### Soal 3d
 Pada soal ini diminta untuk Semua file harus berada di dalam folder, jika terdapat file yang tidak memiliki ekstensi, file disimpan dalam folder “Unknown”. Jika file hidden, masuk folder “Hidden”.
 <br>
 untuk file yang tidak dapat dikategorikan sudah dilakukan pemeriksaan pada fungsi `moveFile` dan `catFolder`
@@ -366,8 +366,8 @@ dengan  cara
 ### Soal 3e
 Pada soal ini diminta untuk setiap 1 file yang dikategorikan dioperasikan oleh 1 thread agar bisa berjalan secara paralel sehingga proses kategori bisa berjalan lebih cepat.
 <br>
-untuk **soal 3a** sudah dengan menggunakan 1 thread 
-untuk **soal 3b** dan **soal 3c** masih belum memahami penggunaan  satu thread secara rekursif
+- untuk **soal 3a** sudah dengan menggunakan 1 thread 
+- untuk **soal 3b** dan **soal 3c** masih belum memahami penggunaan  satu thread secara rekursif
 ### Kendala 
 - masih belum memahami penggunaan  satu thread secara rekursif
 
