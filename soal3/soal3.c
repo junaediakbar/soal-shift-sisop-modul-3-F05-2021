@@ -242,7 +242,7 @@ void listFilesRecursively(char *basePath, int *iret, pthread_t *threads)
             i++;
             listFilesRecursively(path, iret, threads);
         }
-    }
+        }
     closedir(dir);
 }
 
