@@ -54,7 +54,7 @@ int checkAllFileExist(int argc, char *argv[])
 
 const char *get_filename_ext(const char *filename)
 {
-    const char *dot = strrchr(filename, '.');
+    const char *dot = strchr(filename, '.');
     if (!dot || dot == filename)
         return "";
 
@@ -242,7 +242,7 @@ void listFilesRecursively(char *basePath, int *iret, pthread_t *threads)
             i++;
             listFilesRecursively(path, iret, threads);
         }
-        }
+    }
     closedir(dir);
 }
 
