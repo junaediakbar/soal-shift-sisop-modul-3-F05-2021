@@ -21,7 +21,7 @@
 int countfile = 1;
 int work = 0;
 
-int isDirectory(const char *path)
+int isDirectory(char *path)
 {
     struct stat statbuf;
     if (stat(path, &statbuf) != 0)
@@ -52,9 +52,10 @@ int checkAllFileExist(int argc, char *argv[])
     return TRUE;
 }
 
-const char *get_filename_ext(const char *filename)
+char *get_filename_ext(char *filename)
 {
-    const char *dot = strchr(filename, '.');
+    char *dot = strchr(filename, '.');
+
     if (!dot || dot == filename)
         return "";
 
@@ -108,8 +109,24 @@ void *moveFile(void *ptr)
 {
     int flag = 0;
     char *param = (char *)ptr;
-    const char *extension_temp = get_filename_ext(param);
+    char *extension_temp = get_filename_ext(param);
+    if (strchr(extension_temp, ' '))
+    {
+        extension_temp = strrchr(extension_temp, ' ');
+        extension_temp = strchr(extension_temp, '.');
+    }
+    if (strchr(extension_temp, '_'))
+    {
+        extension_temp = strrchr(extension_temp, '_');
+        extension_temp = strchr(extension_temp, '.');
+    }
+    if (strchr(extension_temp, '-'))
+    {
+        extension_temp = strrchr(extension_temp, '-');
+        extension_temp = strchr(extension_temp, '.');
+    }
     int ch, i, length = strlen(extension_temp);
+
     char extension[100];
     char *filename = basename(param);
     char new_path[1000], temp[1000];
@@ -170,8 +187,25 @@ void *catFolder(void *ptr)
 {
     int flag = 0;
     char *param = (char *)ptr;
-    const char *extension_temp = get_filename_ext(param);
+    char *extension_temp = get_filename_ext(param);
+    if (strchr(extension_temp, ' '))
+    {
+        extension_temp = strrchr(extension_temp, ' ');
+        extension_temp = strchr(extension_temp, '.');
+    }
+    if (strchr(extension_temp, '_'))
+    {
+        extension_temp = strrchr(extension_temp, '_');
+        extension_temp = strchr(extension_temp, '.');
+    }
+    if (strchr(extension_temp, '-'))
+    {
+        extension_temp = strrchr(extension_temp, '-');
+        extension_temp = strchr(extension_temp, '.');
+    }
+
     int ch, i, length = strlen(extension_temp);
+
     char extension[100];
     char *filename = basename(param);
     char new_path[1000], temp[1000];
@@ -194,7 +228,7 @@ void *catFolder(void *ptr)
 
         if (!strlen(extension_temp))
         {
-            if (!isDirectory("Unknown"))
+            if (!isDirectory("Unknown") && !isDirectory(ptr))
                 mkdir("Unknown", 0777);
             strcpy(new_path, "Unknown/");
             strcat(new_path, filename);
@@ -202,7 +236,7 @@ void *catFolder(void *ptr)
         }
         else
         {
-            if (!isDirectory(extension))
+            if (!isDirectory(extension) && !isDirectory(ptr))
                 mkdir(extension, 0777);
             strcpy(new_path, extension);
             strcat(new_path, "/");
@@ -227,7 +261,7 @@ void listFilesRecursively(char *basePath, int *iret, pthread_t *threads)
         {
             //printf("%s\n", dp->d_name);
 
-            // Construct new path from our base path
+            //  ruct new path from our base path
             strcpy(path, basePath);
             strcat(path, "/");
             strcat(path, dp->d_name);
