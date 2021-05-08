@@ -2,9 +2,14 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <unistd.h>
+#include <string.h>
+
+int a[4][3];
+int b[3][6];
+int (*ans)[6];
 
 // fungsi mengalikan
-void kali(int a[][3], int b[][6], int (*ans)[6]){
+void kali(){
     int i, j, k;
     for(i = 0; i < 4; i++){
         for(j = 0; j < 6; j++){
@@ -16,7 +21,7 @@ void kali(int a[][3], int b[][6], int (*ans)[6]){
     }
 }
 
-void isiMatriks1(int a[][3]){
+void isiMatriks1(){
     int i, j;
     printf("Masukkan matriks 4 x 3 : \n");
     for(i = 0; i < 4; i++){
@@ -26,7 +31,7 @@ void isiMatriks1(int a[][3]){
     }
 }
 
-void isiMatriks2(int b[][6]){
+void isiMatriks2(){
     int i, j;
     printf("Masukkan matriks 3 x 6 : \n");
     for(i = 0; i < 3; i++){
@@ -36,12 +41,12 @@ void isiMatriks2(int b[][6]){
     }
 }
 
-void print(int (*result)[6]){
+void printHasil(){
     int i,j;
     printf("Hasil perkaliannya adalah : \n");
     for(i = 0; i < 4; i++){
         for(j = 0; j < 6; j++){
-            printf("%d ", result[i][j]);
+            printf("%d ", ans[i][j]);
         }
         printf("\n");
     } 
@@ -49,27 +54,24 @@ void print(int (*result)[6]){
 
 int main(){
 
-    int a[4][3];
-    isiMatriks1(a);
+    isiMatriks1();
 
-    int b[3][6];
-    isiMatriks2(b);
+    isiMatriks2();
 
     // Bantuan 2B shared memory
     //Key yang bakal digunain buat shared memory
     key_t key = 1234;
-    int (*result)[6];
 
     //Buat segment shared memorynya (return identifiernya)
-    int shmid = shmget(key, sizeof(int[4][6]), IPC_CREAT | 0666);
-    result = shmat(shmid, 0, 0);
-    
-    kali(a, b, result);
-    print(result);
+    int shmid = shmget(key, sizeof(int [4][6]), IPC_CREAT | 0666);
+    ans = shmat(shmid, NULL, 0);
 
-    sleep(5);
 
-    shmdt(result);
+    kali();
+    printHasil();
+
+    sleep(10);
+
+    shmdt(ans);
     shmctl(shmid, IPC_RMID, NULL);
 }   
-
