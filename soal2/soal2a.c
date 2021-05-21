@@ -70,7 +70,7 @@ int main(){
     kali();
     printHasil();
 
-    sleep(10);
+    sleep(45);
 
     shmdt(ans);
     shmctl(shmid, IPC_RMID, NULL);
