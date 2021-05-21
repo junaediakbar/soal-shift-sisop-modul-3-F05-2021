@@ -284,6 +284,10 @@ proses selanjutnya (head) juga dapat terbaca oleh pipe ke dua.
 Sehingga hasil akhirnya terbentuk perintah "ps" di pipe ke 1, yang membaca perintah "sort" di pipe ke 2, dimana pipe ke dua juga membaca perintah terakhir yaitu "head". Sehingga proses dapat berjalan
 sesuai dengan syntax yang diberikan dengan menggunakan IPC pipes.
 
+### Kendala
+- Awalnya bingung untuk menentukan ujung mana yang harus dibuka dan harus ditutup pada pipe untuk soal2c. Namun pada akhirnya bisa diselesaikan.
+- Pada testcase yang diberikan, soal2b menghasilkan nilai minus, dan ternyata terjadi kesalahan pada tipe data yang digunakan.
+
 ## Soal 3
 Rekap:
 Program ini akan memindahkan file sesuai ekstensinya ke dalam folder sesuai ekstensinya yang folder hasilnya terdapat di working directory ketika program kategori tersebut dijalankan.
