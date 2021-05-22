@@ -203,6 +203,10 @@ ke matriks lokal agar lebih mudah untuk dioperasikan.
 maka dilakukan join thread, `pthread_join(tid[i][j], NULL);`.
 - Kemudian yang terakhir print hasilnya `printHasil();`.
 
+Ketika program 2a (kiri) dan 2b (kanan) dijalankan, jika dimasukkan matrix sesuai dengan test case yang diberikan, maka akan terlihat hasilnya adalah :<br>
+<img src="images/soal2/2ab.PNG">
+
+
 ### Soal2C
 Pada soal 2C, kami diminta untuk membuat rangkaian IPC Pipes untuk menjalankan perintah "ps aux | sort -nrk 3,3 | head -5". Untuk menyelesaikannya, 
 dimasukkan perintah :
@@ -283,6 +287,9 @@ proses selanjutnya (head) juga dapat terbaca oleh pipe ke dua.
 
 Sehingga hasil akhirnya terbentuk perintah "ps" di pipe ke 1, yang membaca perintah "sort" di pipe ke 2, dimana pipe ke dua juga membaca perintah terakhir yaitu "head". Sehingga proses dapat berjalan
 sesuai dengan syntax yang diberikan dengan menggunakan IPC pipes.
+
+Ketika program 2c dijalankan, maka akan dihasilkan :<br>
+<img src="images/soal2/soal2c.PNG">
 
 ### Kendala
 - Awalnya bingung untuk menentukan ujung mana yang harus dibuka dan harus ditutup pada pipe untuk soal2c. Namun pada akhirnya bisa diselesaikan.
