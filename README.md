@@ -1,6 +1,11 @@
 # soal-shift-sisop-modul-3-F05-2021
 
 ## Soal 1
+
+### Kendala
+Dikarenakan beberapa mata kuliah mengadakan dan memberikan ETS dan juga tugas atau quiz, jadi untuk soal nomer 1 bagian C sampai dengan H 
+belum bisa dikerjakan dengan maksimal.
+
 ## Soal 2
 Untuk soal nomor dua, terdapat 3 sub soal yang harus dikerjakan, dimana setiap sub soal memiliki perintahnya masing - masing.<br>
 
