@@ -3,7 +3,7 @@
 ## Soal 1
 
 ### Kendala
-Dikarenakan beberapa mata kuliah mengadakan dan memberikan ETS dan juga tugas atau quiz, jadi untuk soal nomer 1 bagian C sampai dengan H 
+Dikarenakan beberapa mata kuliah mengadakan dan memberikan ETS dan juga beberapa tugas atau quiz, jadi untuk soal nomer 1 bagian C sampai dengan H 
 belum bisa dikerjakan dengan maksimal.
 
 ## Soal 2
