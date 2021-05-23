@@ -575,7 +575,8 @@ dengan  cara
     }
 ```
 <img src="images/soal3/3d.png">
-###soal 3e
+terlihat bahwa file tersembunyi dan file tanpa extensi sudah dipindahkan ke folder Hidden dan Unknown 
+<h3>Soal 3e</h3>
 Sudah menerapkan 1 thread untuk setiap pemindahannya, karena file dipindahkan secara satu-persatu untuk setiap filenya
 <br>
 #### Kendala 
