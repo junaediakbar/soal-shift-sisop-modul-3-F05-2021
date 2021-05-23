@@ -548,8 +548,9 @@ menjadi
 ### Soal 3d
 Pada soal ini diminta untuk Semua file harus berada di dalam folder, jika terdapat file yang tidak memiliki ekstensi, file disimpan dalam folder “Unknown”. Jika file hidden, masuk folder “Hidden”.
 <br>
-untuk file yang tidak dapat dikategorikan sudah dilakukan pemeriksaan pada fungsi `moveFile` dan `catFolder`
+untuk file yang tidak dapat dikategorikan sudah dilakukan pemeriksaan pada fungsi `moveFile`
 dengan  cara 
+
 ```
   if (!strlen(extension_temp))
         {
@@ -562,6 +563,7 @@ dengan  cara
 ```
 untuk file yang tersembuyi sudah dilakukan pemeriksaan pada fungsi `moveFile` dan `catFolder` dengan mengenali nama awal dari file tersebut adalah `.`
 dengan  cara 
+
 ```
  if (filename[0] == '.')
     {
@@ -572,16 +574,12 @@ dengan  cara
         moveFileToNewPath(param, new_path);
     }
 ```
-<img src="images/soal3/soal3d.png">
-### Soal 3e
-Pada soal ini diminta untuk setiap 1 file yang dikategorikan dioperasikan oleh 1 thread agar bisa berjalan secara paralel sehingga proses kategori bisa berjalan lebih cepat.
+<img src="images/soal3/3d.png">
+###soal 3e
+Sudah menerapkan 1 thread untuk setiap pemindahannya, karena file dipindahkan secara satu-persatu untuk setiap filenya
 <br>
-- untuk **soal 3a** sudah dengan menggunakan 1 thread 
-- untuk **soal 3b** dan **soal 3c** masih belum memahami penggunaan  satu thread secara rekursif
-### Kendala 
+#### Kendala 
 - masih belum memahami penggunaan  satu thread secara rekursif, namun dapat diselesaikan setelah revisi
 
-### Kendala 
-- masih belum memahami penggunaan  satu thread secara rekursif, namun dapat diselesaikan setelah revisi
 
 
