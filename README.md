@@ -429,6 +429,12 @@ void *moveFile(void *arg)
     return NULL;
 }
 ```
+<img src="images/soal3/3a.png">
+lalu menjadi
+<img src="images/soal3/3a hasil.png">
+<br>
+<img src="images/soal3/3a hasil2.png">
+
 ### Soal 3b
 Soal ini diminta untuk membuat Program yang juga dapat menerima opsi -d untuk melakukan pengkategorian pada suatu directory. Namun pada opsi -d ini, user hanya bisa memasukkan input 1 directory saja, tidak seperti file yang bebas menginput file sebanyak mungkin. Contohnya adalah seperti ini:
 ```
@@ -511,6 +517,10 @@ void listFilesRecursively(char *basePath)
 Di dalam fungsi tersebut juga sudah terdapat thread yang akan melakukan pemindahan file
 ` err = pthread_create(&(threads[threadCount - 2]), NULL, &moveFile, (void *)path);`
 Selanjutnya pada fungsi **moveFile** akan melakukan hal yang sama seperti `soal 3a` namun mengeluarkan output yang berbeda
+<img src="images/soal3/3b.png">
+menjadi
+<img src="images/soal3/3b hasil.png">
+
 
 ### soal 3c
 Pada soal ini diminta untuk membuat program ini menerima opsi *, contohnya ada di bawah ini:
@@ -532,6 +542,9 @@ hal yang dilakukan mirip seperti pada **soal 3b** yaitu dengan membuat case baru
     }
 ```
 lalu menggunakan fungsi yang sama yaitu `listFilesRecursively(".");`
+<img src="images/soal3/3c.png">
+menjadi
+<img src="images/soal3/3c hasil.png">
 ### Soal 3d
 Pada soal ini diminta untuk Semua file harus berada di dalam folder, jika terdapat file yang tidak memiliki ekstensi, file disimpan dalam folder “Unknown”. Jika file hidden, masuk folder “Hidden”.
 <br>
@@ -559,11 +572,15 @@ dengan  cara
         moveFileToNewPath(param, new_path);
     }
 ```
+<img src="images/soal3/soal3d.png">
 ### Soal 3e
 Pada soal ini diminta untuk setiap 1 file yang dikategorikan dioperasikan oleh 1 thread agar bisa berjalan secara paralel sehingga proses kategori bisa berjalan lebih cepat.
 <br>
 - untuk **soal 3a** sudah dengan menggunakan 1 thread 
 - untuk **soal 3b** dan **soal 3c** masih belum memahami penggunaan  satu thread secara rekursif
+### Kendala 
+- masih belum memahami penggunaan  satu thread secara rekursif, namun dapat diselesaikan setelah revisi
+
 ### Kendala 
 - masih belum memahami penggunaan  satu thread secara rekursif, namun dapat diselesaikan setelah revisi
 
